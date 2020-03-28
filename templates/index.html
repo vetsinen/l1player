@@ -8,7 +8,10 @@
 
 </head>
 <body>
-<button id="guitara" disabled>play/stop</button>
+<button id="guitara" disabled>play/stop</button><br>
+    {% for file in files %}
+        <button>play/stop</button>{{ file }}<div></div>
+    {% endfor %}
 <script>
     (function () {
         'use strict';
