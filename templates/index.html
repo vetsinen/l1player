@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>l1player</title>
+    <link rel="stylesheet" href="static/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+</head>
+<body>
+<button id="guitara" disabled>play/stop</button>
+<script>
+    (function () {
+        'use strict';
+
+        const URL = 'static/mp3/bacha-v5-guitar-gitara.mp3';
+
+        const context = new AudioContext();
+        const playButton = document.querySelector('#guitara');
+
+        let trackBuffer;
+        let silence = true;
+        let source;
+
+        window.fetch(URL)
+            .then(response => response.arrayBuffer())
+            .then(arrayBuffer => context.decodeAudioData(arrayBuffer))
+            .then(audioBuffer => {
+                playButton.disabled = false;
+                source = context.createBufferSource();
+                source.buffer = audioBuffer;
+                source.connect(context.destination);
+            });
+
+        playButton.onclick = function () {
+            if (silence){
+                silence = false;
+                source.start();
+            }
+            else {
+                silence = true;
+                source.stop();
+            }
+        };
+
+        function play(audioBuffer) {
+            const source = context.createBufferSource();
+            source.buffer = audioBuffer;
+            source.connect(context.destination);
+            source.start();
+        }
+    }());
+</script>
+</body>
+</html>
