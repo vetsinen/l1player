@@ -1,7 +1,8 @@
 from flask import Flask
 from flask import render_template
 from os import listdir
-
+import pathlib
+print(pathlib.Path(__file__).parent.absolute())
 app = Flask(__name__)
 
 def process_names(files):
@@ -17,8 +18,9 @@ def process_names(files):
 
 @app.route('/')
 def index():
-
-    files = [f for f in listdir('/static/mp3/')]
+    staticpath = str(pathlib.Path(__file__).parent.absolute())+'/static/mp3'
+    print(staticpath)
+    files = [f for f in listdir(staticpath)]
     return render_template('index.html', files = process_names(files))
 
 
