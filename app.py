@@ -18,7 +18,7 @@ def process_names(files):
 @app.route('/')
 def index():
 
-    files = [f for f in listdir('static/mp3')]
+    files = [f for f in listdir('/static/mp3/')]
     return render_template('index.html', files = process_names(files))
 
 
