@@ -11,13 +11,7 @@ def process_names(files):
     return rez
 
 
-files = [f for f in listdir('static/mp3')]
-print(process_names(files))
 
-a = files[0]
-a = a[:-4]
-if (a[4:7])=='a-v':
-    a = a[9:]
 
 
 

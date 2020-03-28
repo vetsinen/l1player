@@ -5,54 +5,59 @@
     <title>l1player</title>
     <link rel="stylesheet" href="static/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script>
+            'use strict';
 
+            const URL = 'static/mp3/bacha-v5-guitar-gitara.mp3';
+
+            const context = new AudioContext();
+            const playButton = document.querySelector('#guitara');
+
+            let trackBuffer;
+            let currentTrack;
+            let source;
+
+
+            function prepareTrack(trackname) {
+                window.fetch('/static/mp3/' + trackname + '.mp3')
+                    .then(response => response.arrayBuffer())
+                    .then(arrayBuffer => context.decodeAudioData(arrayBuffer))
+                    .then(audioBuffer => {
+                        console.log('we gotta');
+                        if (source){source.stop;}
+                        source = context.createBufferSource();
+                        source.buffer = audioBuffer;
+                        source.connect(context.destination);
+                        currentTrack = trackname;
+                        source.start();
+                    });
+            }
+
+            function play(trackname) {
+                console.log(trackname);
+                if (currentTrack===trackname){
+                    source.stop();
+                    source = undefined;
+                    currentTrack=undefined;
+                }
+                else {
+                    if (source){
+                        source.stop();
+                        source = undefined;
+                    }
+                    prepareTrack(trackname);
+                }
+            }
+
+    </script>
 </head>
 <body>
-<button id="guitara" disabled>play/stop</button><br>
-    {% for file in files %}
-        <button>play/stop</button>{{ file }}<div></div>
-    {% endfor %}
-<script>
-    (function () {
-        'use strict';
+{% for file in files %}
+    <div>
+        <button id="{{ file }}" onclick="play('{{ file }}')">play/stop</button>
+        {{ file }}
+    </div>
+{% endfor %}
 
-        const URL = 'static/mp3/bacha-v5-guitar-gitara.mp3';
-
-        const context = new AudioContext();
-        const playButton = document.querySelector('#guitara');
-
-        let trackBuffer;
-        let silence = true;
-        let source;
-
-        window.fetch(URL)
-            .then(response => response.arrayBuffer())
-            .then(arrayBuffer => context.decodeAudioData(arrayBuffer))
-            .then(audioBuffer => {
-                playButton.disabled = false;
-                source = context.createBufferSource();
-                source.buffer = audioBuffer;
-                source.connect(context.destination);
-            });
-
-        playButton.onclick = function () {
-            if (silence){
-                silence = false;
-                source.start();
-            }
-            else {
-                silence = true;
-                source.stop();
-            }
-        };
-
-        function play(audioBuffer) {
-            const source = context.createBufferSource();
-            source.buffer = audioBuffer;
-            source.connect(context.destination);
-            source.start();
-        }
-    }());
-</script>
 </body>
 </html>
