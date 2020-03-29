@@ -17,13 +17,16 @@
             <source src="/static/mp3/{{ file }}.mp3" type="audio/mpeg">
         </audio>
         <span class="songname">{{ file }}</span>
-        <select name="zhenre" id="">
-            <option disabled>choose zhenre</option>
+        <select name="genre" id="">
+            <option disabled>choose genre</option>
             <option value="salsa">salsa</option>
             <option value="bacha">bachata</option>
-            <option value="semba">kizomba tradicional</option>
+            <option value="semba">urban kizomba</option>
             <option value="menga">merengue</option>
             <option value="bacha">dominicana</option>
+            <option value="semba">kizomba tradicional</option>
+            <option value="chacha">chacha</option>
+            <option value="son">son</option>
             <option value="timba">timba</option>
         </select>
 
@@ -33,6 +36,8 @@
             <option value="normal">normal</option>
             <option value="fast">fast</option>
         </select>
+
+        <input type="button" value="ok">
 
     </div>
 {% endfor %}
