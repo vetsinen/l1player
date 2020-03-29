@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>l1player</title>
     <link rel="stylesheet" href="static/bootstrap.min.css">
+    <link rel="stylesheet" href="static/main.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script>
 
@@ -15,7 +16,24 @@
         <audio id="{{ file }}" controls>
             <source src="/static/mp3/{{ file }}.mp3" type="audio/mpeg">
         </audio>
-        <span>{{ file }}</span>
+        <span class="songname">{{ file }}</span>
+        <select name="zhenre" id="">
+            <option disabled>choose zhenre</option>
+            <option value="salsa">salsa</option>
+            <option value="bacha">bachata</option>
+            <option value="semba">kizomba tradicional</option>
+            <option value="menga">merengue</option>
+            <option value="bacha">dominicana</option>
+            <option value="timba">timba</option>
+        </select>
+
+        <select name="velocity" id="">
+            <option disabled>choose velocity</option>
+            <option value="slow">slow</option>
+            <option value="normal">normal</option>
+            <option value="fast">fast</option>
+        </select>
+
     </div>
 {% endfor %}
 
