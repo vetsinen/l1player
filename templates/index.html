@@ -12,23 +12,31 @@
 </head>
 <body>
 <div><button id="random">play random track</button></div>
-{% for file in files %}
+{% for track in tracks %}
     <div>
-        <audio id="{{ file }}" controls>
-            <source src="/static/mp3/{{ file }}.mp3" type="audio/mpeg">
+        <audio id="{{ track[0] }}" controls>
+            <source src="/static/mp3/{{ track[0] }}.mp3" type="audio/mpeg">
         </audio>
-        <span class="songname">{{ file }}</span>
+        <span class="songname">{{ track[0] }}</span>
         <select name="genre" id="">
-            <option disabled>choose genre</option>
-            <option value="salsa">salsa</option>
-            <option value="bacha">bachata</option>
-            <option value="kurba">urban kizomba</option>
-            <option value="menga">merengue</option>
-            <option value="domba">dominicana</option>
-            <option value="semba">kizomba tradicional</option>
-            <option value="chacha">chacha</option>
-            <option value="sonna">son</option>
+            {% if tracks[1]|length %}
+            <option value="{{track[1]}}" selected="selected">{{track[1]}}</option>
+            {% else %}
+            <option disabled selected="selected">choose genre</option>
+            {% endif %}
+            <option value="salsa cubana">salsa cubana</option>
+            <option value="bachata">bachata</option>
+            <option value="urban kiz">urban kiz</option>
             <option value="timba">timba</option>
+            <option value="dominicana">dominicana</option>
+            <option value="chacha">chacha</option>
+            <option value="kizomba(tradicional)">kizomba(tradicional)</option>
+            <option value="tarraxinha">tarraxinha</option>
+            <option value="TarraxO">TarraxO</option>
+            <option value="son">son</option>
+            <option value="semba">semba</option>
+            <option value="douceur">douceur</option>
+            <option value="merengue">merengue</option>
         </select>
 
         <select name="velocity" id="">
@@ -38,14 +46,14 @@
             <option value="fast">fast</option>
         </select>
 
-        <input onclick="send('{{ file }}')" type="button" value="ok">
+        <input onclick="send('{{ track[0] }}')" type="button" value="ok">
 
     </div>
 {% endfor %}
 
 <script>
-    let files = {{files | safe}};
-    const tracksN = files.length;
+    let tracks = {{tracks | safe}};
+    const tracksN = tracks.length;
 
 </script>
 <script src="static/main.js"></script>

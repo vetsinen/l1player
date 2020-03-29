@@ -5,17 +5,18 @@ let shuffleMode = false;
 
 document.addEventListener("DOMContentLoaded", function (event) {
     console.log('ready');
-    for (let track of files) {
-        document.getElementById(track).addEventListener('playing', () => {
+    for (let track of tracks) {
+        console.log('currentTrack-' + track[0]);
+        document.getElementById(track[0]).addEventListener('playing', () => {
             console.log('currentTrack-' + currentTrack);
-            console.log(track + ' started in chrome');
-            if (currentTrack !== track && currentTrack) {
+            console.log(track[0] + ' started in chrome');
+            if (currentTrack !== track[0] && currentTrack) {
                 document.getElementById(currentTrack).pause();
             }
-            currentTrack = track;
+            currentTrack = track[0];
         });
 
-        document.getElementById(track).addEventListener('ended', () => playRandomTrack());
+        document.getElementById(track[0]).addEventListener('ended', () => playRandomTrack());
     }
 
     document.getElementById('random').addEventListener('click', () => playRandomTrack());
@@ -25,13 +26,11 @@ function playRandomTrack() {
     function getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
     }
-
     if (currentTrack) {
         document.getElementById(currentTrack).pause();
     }
 
-    shuffleMode = true;
-    currentTrack = files[getRandomInt(tracksN)];
+    currentTrack = tracks[getRandomInt(tracksN)][0];
     console.log(currentTrack + ' to play next');
     document.getElementById(currentTrack).play();
 }
