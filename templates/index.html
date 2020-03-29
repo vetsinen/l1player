@@ -6,62 +6,22 @@
     <link rel="stylesheet" href="static/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script>
-        'use strict';
-
-        const context = new AudioContext();
-        let trackBuffer;
-
-        const playButton = document.querySelector('#guitara');
-
-
-        let currentTrack;
-        let source;
-
-        function prepareTrack(trackname) {
-            window.fetch('/static/mp3/' + trackname + '.mp3')
-                .then(response => response.arrayBuffer())
-                .then(arrayBuffer => context.decodeAudioData(arrayBuffer))
-                .then(audioBuffer => {
-                    console.log('we gotta');
-                    if (source) {
-                        source.stop;
-                    }
-                    source = context.createBufferSource();
-                    source.buffer = audioBuffer;
-                    source.connect(context.destination);
-                    currentTrack = trackname;
-                    source.start();
-                });
-        }
-
-        function play(trackname) {
-            console.log(trackname);
-            if (currentTrack === trackname) {
-                source.stop();
-                source = undefined;
-                currentTrack = undefined;
-            } else {
-                if (source) {
-                    source.stop();
-                    source = undefined;
-                }
-                prepareTrack(trackname);
-            }
-        }
 
     </script>
 </head>
 <body>
 {% for file in files %}
     <div>
-        <audio controls>
+        <audio id="{{ file }}" controls>
             <source src="/static/mp3/{{ file }}.mp3" type="audio/mpeg">
         </audio>
         <span>{{ file }}</span>
-        {#        <button id="{{ file }}" onclick="play('{{ file }}')">play/stop</button>#}
-        {#        {{ file }}#}
     </div>
 {% endfor %}
 
+<script>
+    var files = {{files | safe}};
+</script>
+<script src="static/main.js"></script>
 </body>
 </html>
