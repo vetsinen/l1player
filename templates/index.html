@@ -23,9 +23,8 @@
         <select class="genre">
             {% if tracks[1]|length %}
                 <option value="{{ track[1] }}" selected="selected">{{ track[1] }}</option>
-            {% else %}
-                <option disabled selected="selected">choose genre</option>
             {% endif %}
+            <option disabled>choose genre</option>
             <option value="salsa cubana">salsa cubana</option>
             <option value="bachata">bachata</option>
             <option value="urban kiz">urban kiz</option>
@@ -42,9 +41,12 @@
         </select>
 
         <select class="velocity">
+            {% if tracks[2]|length %}
+                <option value="{{ track[2] }}" selected="selected">{{ track[2] }}</option>
+            {% endif %}
             <option disabled>choose velocity</option>
             <option value="slow">slow</option>
-            <option value="normal" selected="selected">normal</option>
+            <option value="normal">normal</option>
             <option value="fast">fast</option>
         </select>
 

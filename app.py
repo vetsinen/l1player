@@ -22,9 +22,10 @@ def index():
 
 @app.route('/opinion/<track>/<genre>/<velocity>', methods=['POST'])
 def opinion(track, genre, velocity):
-    print(track + ' is a ' + genre)
+    msg = f"track {track} is a {genre} with {velocity} velocity"
+    print(msg)
     save_opinion(track, genre, velocity)
-    return track + ' is a ' + genre
+    return msg
 
 
 if __name__ == '__main__':
