@@ -11,18 +11,20 @@
     </script>
 </head>
 <body>
-<div><button id="random">play random track</button></div>
+<div>
+    <button id="random">play random track</button>
+</div>
 {% for track in tracks %}
-    <div>
-        <audio id="{{ track[0] }}" controls>
+    <div id="{{ track[0] }}">
+        <audio controls>
             <source src="/static/mp3/{{ track[0] }}.mp3" type="audio/mpeg">
         </audio>
         <span class="songname">{{ track[0] }}</span>
-        <select name="genre" id="">
+        <select class="genre">
             {% if tracks[1]|length %}
-            <option value="{{track[1]}}" selected="selected">{{track[1]}}</option>
+                <option value="{{ track[1] }}" selected="selected">{{ track[1] }}</option>
             {% else %}
-            <option disabled selected="selected">choose genre</option>
+                <option disabled selected="selected">choose genre</option>
             {% endif %}
             <option value="salsa cubana">salsa cubana</option>
             <option value="bachata">bachata</option>
@@ -39,7 +41,7 @@
             <option value="merengue">merengue</option>
         </select>
 
-        <select name="velocity" id="">
+        <select class="velocity">
             <option disabled>choose velocity</option>
             <option value="slow">slow</option>
             <option value="normal" selected="selected">normal</option>
@@ -47,7 +49,6 @@
         </select>
 
         <input onclick="send('{{ track[0] }}')" type="button" value="ok">
-
     </div>
 {% endfor %}
 
