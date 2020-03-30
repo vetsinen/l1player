@@ -36,8 +36,8 @@ function playRandomTrack() {
 }
 
 let http = new XMLHttpRequest();
-let params = 'orem=ipsum&name=binny';
-http.open('POST', 'opinion', true);
+let params = '';
+http.open('POST', 'opinion/ipsum/binny', true);
 
 //Send the proper header information along with the request
 http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');

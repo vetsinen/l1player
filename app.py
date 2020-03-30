@@ -24,8 +24,8 @@ def index():
     return render_template('index.html', tracks=get_tracks())
 
 
-@app.route('/opinion', methods=['POST'])
-def opinion():
+@app.route('/opinion/<genre>/<velocity>', methods=['POST'])
+def opinion(genre,velocity):
     return 'added'
 
 
