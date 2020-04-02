@@ -28,9 +28,10 @@
 {% for track in tracks %}
     <div id="{{ track[0] }}">
         <audio controls>
-            <source src="/static/mp3/{{ track[0] }}.mp3" type="audio/mpeg">
+            <source src="https://github.com/vetsinen/l1player/blob/master/static/mp3/{{ track[0] }}.mp3?raw=true" type="audio/mpeg">
         </audio>
         <span class="songname">{{ track[0] }}</span>
+        <button id="like">{{ track[3] }}❤</button>
         <select class="genre">
             {% if tracks[1]|length %}
                 <option value="{{ track[1] }}" selected="selected">{{ track[1] }}</option>
@@ -43,6 +44,7 @@
             <option value="urban kiz">urban kiz</option>
             <option value="chachacha">chachacha</option>
             <option value="timba">timba</option>
+            <option value="salsa la">salsa la</option>
             <option value="dominicana">dominicana</option>
             <option value="kizomba(tradicional)">kizomba(tradicional)</option>
             <option value="tarraxinha">tarraxinha</option>

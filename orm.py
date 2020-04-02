@@ -28,7 +28,7 @@ def sync_trackfiles_to_db():
 def get_tracks():
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
-    rez = [list(row) for row in cursor.execute("SELECT trackname,genre,velocity FROM opinion")]
+    rez = [list(row) for row in cursor.execute("SELECT trackname,genre,velocity,votes FROM opinion")]
     db.close()
     return rez
 
