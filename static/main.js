@@ -38,13 +38,10 @@ function playRandomTrack() {
 function send(track) {
     let http = new XMLHttpRequest();
     let params = '';
-    let url = 'opinion/'+track+'/'
+    let url = 'opinion/' + track + '/'
         + document.getElementById(track).getElementsByClassName('genre')[0].value
-        + '/' + document.getElementById(track).getElementsByClassName('velocity')[0].value;
-
+    ;//+ '/' + document.getElementById(track).getElementsByClassName('velocity')[0].value;
     http.open('POST', url, true);
-
-    //Send the proper header information along with the request
     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
     http.onreadystatechange = function () {//Call a function when the state changes.
@@ -54,5 +51,22 @@ function send(track) {
     };
     console.log(track);
     http.send(params);
+}
+
+function like(track) {
+    console.log('track  ' + track);
+    let votes = parseInt(document.getElementById(track).getElementsByClassName('votes')[0].value)+1;
+
+    let http = new XMLHttpRequest();
+    let params = '';
+    let url = 'vote/' + track;
+    http.open('POST', url, true);
+    http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    http.send(params);
+    document.getElementById(track).getElementsByClassName('votes')[0].innerHTML = votes + '❤';
+    document.getElementById(track).getElementsByClassName('votes')[0].disabled = 'disabled';
+
+
+    console.log('track liked ' + votes);
 }
 
